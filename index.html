@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Webpage</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#6a11cb,#2575fc);
+            color:white;
+            text-align:center;
+        }
+
+        header{
+            background:#ff6b6b;
+            padding:20px;
+        }
+
+        nav{
+            background:#4ecdc4;
+            padding:15px;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin:15px;
+            font-weight:bold;
+            font-size:18px;
+        }
+
+        .hero{
+            padding:60px 20px;
+        }
+
+        .hero h1{
+            font-size:50px;
+        }
+
+        .hero p{
+            margin-top:15px;
+            font-size:20px;
+        }
+
+        .btn{
+            display:inline-block;
+            margin-top:20px;
+            padding:12px 25px;
+            background:#ffd93d;
+            color:black;
+            text-decoration:none;
+            border-radius:25px;
+            font-weight:bold;
+        }
+
+        .cards{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
+            padding:40px;
+        }
+
+        .card{
+            width:250px;
+            background:white;
+            color:black;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer{
+            background:#222;
+            padding:15px;
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌈 My Colorful Website</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+</nav>
+
+<section class="hero">
+    <h1>Welcome!</h1>
+    <p>Learn HTML & CSS by creating beautiful webpages.</p>
+    <a href="#" class="btn">Get Started</a>
+</section>
+
+<section class="cards">
+
+    <div class="card">
+        <h2>🎨 Design</h2>
+        <p>Create attractive webpages using colorful CSS.</p>
+    </div>
+
+    <div class="card">
+        <h2>💻 Code</h2>
+        <p>Write clean and simple HTML and CSS programs.</p>
+    </div>
+
+    <div class="card">
+        <h2>🚀 Deploy</h2>
+        <p>Publish your website and share it with everyone.</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2026 My Colorful Website | Made with HTML & CSS</p>
+</footer>
+
+</body>
+</html>
