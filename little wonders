@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Wonders Academy — Where Childhood Thrives</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest: #1B4332;
+    --forest-light: #2D6A4F;
+    --sun: #F9C845;
+    --coral: #F4694B;
+    --cream: #FFFDF5;
+    --cream-mid: #F3EED9;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-muted: #7A7A7A;
+    --sky: #D8F0FF;
+    --sky-dark: #0077B6;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    border-bottom: 1.5px solid var(--cream-mid);
+    z-index: 100;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--forest);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo span.dot {
+    width: 10px; height: 10px;
+    background: var(--sun);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-cta {
+    background: var(--forest);
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--forest-light); color: #fff !important; }
+
+  .hero {
+    background: var(--forest);
+    color: #fff;
+    padding: 100px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--sun);
+    color: var(--forest);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.08;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--sun);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    max-width: 540px;
+    margin-bottom: 40px;
+    line-height: 1.65;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--sun);
+    color: var(--forest);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+  .hero-orbs { position: absolute; top: 0; right: 0; bottom: 0; width: 50%; pointer-events: none; z-index: 1; }
+  .orb { position: absolute; border-radius: 50%; opacity: 0.12; }
+  .orb1 { width: 380px; height: 380px; background: var(--sun); top: -80px; right: -60px; }
+  .orb2 { width: 200px; height: 200px; background: var(--coral); bottom: 20px; right: 200px; }
+  .orb3 { width: 120px; height: 120px; background: #fff; top: 60px; right: 260px; }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    color: var(--sun);
+    display: block;
+  }
+  .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+  .wave-divider svg { display: block; }
+
+  section { padding: 80px 5%; }
+  .section-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--forest);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 17px;
+    color: var(--text-mid);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 52px;
+  }
+
+  .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .diff-card {
+    background: #fff;
+    border: 1px solid #E8E4D6;
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .diff-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(27,67,50,0.08); }
+  .diff-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  .diff-icon.green { background: #D8F3E8; }
+  .diff-icon.yellow { background: #FEF5CC; }
+  .diff-icon.coral { background: #FDE8E3; }
+  .diff-icon.sky { background: #D8F0FF; }
+  .diff-icon.purple { background: #EDE8FB; }
+  .diff-icon.mint { background: #E2F5EE; }
+  .diff-card h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 18px; color: var(--forest); margin-bottom: 10px; }
+  .diff-card p { font-size: 15px; color: var(--text-mid); line-height: 1.65; }
+
+  .about-band { background: var(--forest); color: #fff; padding: 80px 5%; position: relative; overflow: hidden; }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  @media (max-width: 768px) { .about-inner { grid-template-columns: 1fr; gap: 40px; } }
+  .about-band .section-title { color: #fff; }
+  .about-band .section-sub { color: rgba(255,255,255,0.7); margin-bottom: 0; }
+  .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .about-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .about-pill:first-child { grid-column: span 2; background: rgba(249,200,69,0.15); border-color: rgba(249,200,69,0.3); }
+  .about-pill-num { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 32px; color: var(--sun); display: block; line-height: 1; margin-bottom: 6px; }
+  .about-pill-label { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+  .teachers-section { background: var(--cream); }
+  .teachers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+  .teacher-card {
+    background: #fff;
+    border: 1px solid #E8E4D6;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .teacher-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,67,50,0.1); }
+  .teacher-avatar {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    position: relative;
+  }
+  .teacher-badge {
+    position: absolute;
+    bottom: 12px; right: 16px;
+    background: var(--forest);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 50px;
+  }
+  .teacher-body { padding: 24px 22px 28px; }
+  .teacher-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 19px; color: var(--forest); margin-bottom: 3px; }
+  .teacher-role { font-size: 13px; font-weight: 500; color: var(--coral); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .teacher-bio { font-size: 14px; color: var(--text-mid); line-height: 1.65; margin-bottom: 16px; }
+  .teacher-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 50px; }
+  .tag.green { background: #D8F3E8; color: #1B5E3B; }
+  .tag.yellow { background: #FEF5CC; color: #7A5A00; }
+  .tag.coral { background: #FDE8E3; color: #9D3520; }
+  .tag.sky { background: #D8F0FF; color: #004F80; }
+  .tag.purple { background: #EDE8FB; color: #4B35A8; }
+
+  .philosophy { background: var(--cream-mid); }
+  .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border: 1px solid #DDD8C4; border-radius: 24px; overflow: hidden; }
+  .philo-item { padding: 36px 32px; border-right: 1px solid #DDD8C4; border-bottom: 1px solid #DDD8C4; background: #fff; transition: background 0.2s; }
+  .philo-item:hover { background: var(--forest); }
+  .philo-item:hover .philo-title { color: var(--sun); }
+  .philo-item:hover .philo-desc { color: #fff; }
+  .philo-item:hover .philo-num { color: rgba(255,255,255,0.1); }
+  .philo-num { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 40px; color: var(--cream-mid); line-height: 1; margin-bottom: 14px; transition: color 0.2s; }
+  .philo-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 17px; color: var(--forest); margin-bottom: 10px; transition: color 0.2s; }
+  .philo-desc { font-size: 14px; color: var(--text-mid); line-height: 1.65; transition: color 0.2s; }
+
+  .testimonials { background: #fff; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .tcard { background: var(--cream); border: 1px solid #E8E4D6; border-radius: 20px; padding: 32px 28px; }
+  .tcard-quote { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 32px; color: var(--sun); line-height: 1; margin-bottom: 16px; }
+  .tcard-text { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+  .tcard-author { display: flex; align-items: center; gap: 12px; }
+  .tcard-avatar { width: 40px; height: 40px; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+  .tcard-name { font-weight: 600; font-size: 14px; color: var(--forest); }
+  .tcard-meta { font-size: 12px; color: var(--text-muted); }
+
+  .cta-section { background: var(--forest); text-align: center; padding: 100px 5%; }
+  .cta-section .section-eyebrow { color: var(--sun); }
+  .cta-section .section-title { color: #fff; margin: 0 auto 16px; }
+  .cta-section p { color: rgba(255,255,255,0.65); font-size: 17px; margin-bottom: 40px; }
+  .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+  footer {
+    background: #0F2B20;
+    color: rgba(255,255,255,0.55);
+    padding: 40px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .footer-logo { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 18px; color: #fff; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; }
+  .footer-links a:hover { color: #fff; }
+
+  @media (max-width: 640px) {
+    nav .nav-links { display: none; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="dot"></span> Little Wonders Academy
+  </a>
+  <ul class="nav-links">
+    <li><a href="#difference">Why Us</a></li>
+    <li><a href="#teachers">Our Teachers</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#testimonials">Families</a></li>
+    <li><a href="#enroll" class="nav-cta">Enroll Now</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Preschool &amp; Kindergarten · Est. 2009</span>
+    <h1>Where every child's <em>curiosity</em> is the curriculum.</h1>
+    <p class="hero-sub">Little Wonders Academy is a place where children aged 2–6 discover the world through play, creativity, and genuine human connection — not worksheets.</p>
+    <div class="hero-actions">
+      <a href="#enroll" class="btn-primary">Book a School Tour</a>
+      <a href="#difference" class="btn-ghost">What makes us different</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">18 : 1</span>
+        <span class="hero-stat-label">Child-to-teacher ratio</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">97%</span>
+        <span class="hero-stat-label">Parent satisfaction score</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">15+</span>
+        <span class="hero-stat-label">Years of nurturing growth</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">6</span>
+        <span class="hero-stat-label">Specialist educators</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider" style="background: var(--forest); line-height:0;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%; height:60px;">
+    <path fill="#FFFDF5" d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"/>
+  </svg>
+</div>
+
+<section id="difference">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-eyebrow">Why Little Wonders</p>
+    <h2 class="section-title">Not your average kindergarten.</h2>
+    <p class="section-sub">Most early childhood centres run on routines and repetition. We believe children thrive when they're genuinely seen, heard, and trusted.</p>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon green">🌿</div>
+        <h3>Nature-led learning spaces</h3>
+        <p>Our campus features a living garden, mud kitchen, and open-air classroom. Children learn science, math, and empathy outdoors — not just inside four walls.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon yellow">✏️</div>
+        <h3>Emergent curriculum</h3>
+        <p>Lessons follow children's own questions and discoveries. A child's wonder about a snail becomes a week of science, storytelling, and art.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon coral">❤️</div>
+        <h3>Social-emotional focus</h3>
+        <p>Every educator is trained in trauma-informed care and positive discipline. We teach children how to name feelings, not suppress them.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon sky">🌍</div>
+        <h3>Multilingual environment</h3>
+        <p>English, Hindi, and Telugu are woven naturally into daily life. Children absorb language from context, conversation, and stories — not drills.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon purple">🎨</div>
+        <h3>Dedicated arts &amp; music studio</h3>
+        <p>A fully equipped studio with clay, canvas, instruments, and a recording nook. Creativity is treated as a core subject, not a Friday afternoon filler.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon mint">📊</div>
+        <h3>Transparent progress portfolios</h3>
+        <p>Parents receive living digital portfolios — photos, observations, and developmental notes — updated weekly, not just at end-of-term report cards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="about-band">
+  <div class="about-inner">
+    <div>
+      <p class="section-eyebrow" style="color: var(--sun);">Our Story</p>
+      <h2 class="section-title">Founded by teachers, for children.</h2>
+      <p class="section-sub">Little Wonders Academy was started in 2009 by a group of early childhood educators who were tired of cookie-cutter classrooms. We built the school we always wished existed: warm, rigorous, and radically child-centred. Every decision — from furniture height to nap schedules — is made with the child's point of view first.</p>
+    </div>
+    <div class="about-visual">
+      <div class="about-pill">
+        <span class="about-pill-num">100%</span>
+        <span class="about-pill-label">Of our teachers hold a B.Ed. or ECE certification</span>
+      </div>
+      <div class="about-pill">
+        <span class="about-pill-num">8 yrs</span>
+        <span class="about-pill-label">Average teacher tenure</span>
+      </div>
+      <div class="about-pill">
+        <span class="about-pill-num">Zero</span>
+        <span class="about-pill-label">Screen time for under-5s</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background: var(--forest); line-height:0;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%; height:60px; display:block;">
+    <path fill="#FFFDF5" d="M0,30 C360,0 720,60 1080,30 C1260,15 1380,40 1440,30 L1440,60 L0,60 Z"/>
+  </svg>
+</div>
+
+<section id="teachers" class="teachers-section">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-eyebrow">Meet the Team</p>
+    <h2 class="section-title">Our teachers are the heart of everything.</h2>
+    <p class="section-sub">Every educator at Little Wonders was handpicked not just for qualifications, but for genuine warmth, curiosity, and the ability to see the world through a child's eyes.</p>
+    <div class="teachers-grid">
+
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: #D8F3E8;">
+          👩‍🏫
+          <span class="teacher-badge">Founder</span>
+        </div>
+        <div class="teacher-body">
+          <p class="teacher-name">Ms. Priya Nair</p>
+          <p class="teacher-role">Head of School · Montessori Lead</p>
+          <p class="teacher-bio">With 18 years in early education, Priya holds a Montessori International Diploma and a Master's in Child Development. She created the school's signature emergent curriculum framework.</p>
+          <div class="teacher-tags">
+            <span class="tag green">Montessori</span>
+            <span class="tag yellow">Curriculum Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: #FEF5CC;">
+          👨‍🎨
+          <span class="teacher-badge">8 yrs here</span>
+        </div>
+        <div class="teacher-body">
+          <p class="teacher-name">Mr. Arjun Reddy</p>
+          <p class="teacher-role">Arts &amp; Creativity Specialist</p>
+          <p class="teacher-bio">A trained visual artist and B.Ed. graduate, Arjun runs the school's art and music studio. He believes every child is an artist — they just need space and someone who believes it too.</p>
+          <div class="teacher-tags">
+            <span class="tag coral">Visual Arts</span>
+            <span class="tag purple">Music &amp; Movement</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: #D8F0FF;">
+          👩‍🔬
+          <span class="teacher-badge">STEM Lead</span>
+        </div>
+        <div class="teacher-body">
+          <p class="teacher-name">Ms. Kavitha Sharma</p>
+          <p class="teacher-role">Science &amp; Nature Educator</p>
+          <p class="teacher-bio">Kavitha turned a corner of the playground into a working vegetable garden and insect observatory. Her hands-on science sessions make children lifelong observers of the natural world.</p>
+          <div class="teacher-tags">
+            <span class="tag green">Nature Education</span>
+            <span class="tag sky">Early STEM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: #FDE8E3;">
+          👩‍💻
+          <span class="teacher-badge">SEL Expert</span>
+        </div>
+        <div class="teacher-body">
+          <p class="teacher-name">Ms. Divya Thomas</p>
+          <p class="teacher-role">Social-Emotional Learning Lead</p>
+          <p class="teacher-bio">Trained in Positive Discipline and trauma-informed pedagogy, Divya runs the school's emotion coaching programme. She helps children build the inner language they need to thrive.</p>
+          <div class="teacher-tags">
+            <span class="tag coral">SEL</span>
+            <span class="tag yellow">Positive Discipline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: #EDE8FB;">
+          👨‍📚
+          <span class="teacher-badge">Language Lead</span>
+        </div>
+        <div class="teacher-body">
+          <p class="teacher-name">Mr. Samuel Kurien</p>
+          <p class="teacher-role">Literacy &amp; Language Specialist</p>
+          <p class="teacher-bio">Samuel's storytelling sessions are legendary. A trained speech-language therapist turned educator, he weaves phonics, vocabulary, and love of books into daily rituals.</p>
+          <div class="teacher-tags">
+            <span class="tag purple">Literacy</span>
+            <span class="tag sky">Multilingual Ed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="teacher-avatar" style="background: #D8F3E8;">
+          👩‍⚕️
+          <span class="teacher-badge">Inclusion</span>
+        </div>
+        <div class="teacher-body">
+          <p class="teacher-name">Ms. Ananya Pillai</p>
+          <p class="teacher-role">Inclusion &amp; Special Needs Coordinator</p>
+          <p class="teacher-bio">With a background in special education and occupational therapy support, Ananya ensures every child — regardless of learning profile — has an individualised pathway that respects their pace.</p>
+          <div class="teacher-tags">
+            <span class="tag green">Inclusive Ed</span>
+            <span class="tag coral">OT Support</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="philosophy" class="philosophy">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-eyebrow">Our Approach</p>
+    <h2 class="section-title">Four pillars. One childhood.</h2>
+    <p class="section-sub">Everything we do is grounded in decades of developmental research and the simple truth that children learn best when they feel safe, loved, and free to explore.</p>
+    <div class="philosophy-grid">
+      <div class="philo-item">
+        <div class="philo-num">01</div>
+        <p class="philo-title">Play is learning</p>
+        <p class="philo-desc">Unstructured and guided play is the primary mode of learning for children under six. We protect this time fiercely from academic pressure.</p>
+      </div>
+      <div class="philo-item">
+        <div class="philo-num">02</div>
+        <p class="philo-title">Relationships first</p>
+        <p class="philo-desc">A secure attachment to a trusted adult is the foundation all learning rests on. Our low ratios ensure no child is invisible.</p>
+      </div>
+      <div class="philo-item">
+        <div class="philo-num">03</div>
+        <p class="philo-title">The child as expert</p>
+        <p class="philo-desc">Children are competent, curious, and capable. We observe before we intervene, and follow their lead before imposing ours.</p>
+      </div>
+      <div class="philo-item" style="border-right: none;">
+        <div class="philo-num">04</div>
+        <p class="philo-title">Community matters</p>
+        <p class="philo-desc">Families are co-educators. We involve parents not as observers but as active partners in their child's learning story.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="testimonials">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-eyebrow">Families Speak</p>
+    <h2 class="section-title">Heard from our community.</h2>
+    <p class="section-sub">Don't take our word for it. These are the families who trusted us with the most important years of their children's lives.</p>
